@@ -23,6 +23,11 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(pybind11)
 
+# Fallback install directory when building without scikit-build (e.g. plain CMake)
+if(NOT DEFINED SKBUILD_PLATLIB_DIR)
+    set(SKBUILD_PLATLIB_DIR "lib")
+endif()
+
 # --------------------------------------------------
 # Core library
 # --------------------------------------------------
@@ -38,6 +43,11 @@ target_compile_features(rlchess PUBLIC cxx_std_20)
 # Python module
 # --------------------------------------------------
 pybind11_add_module(rlchess_engine MODULE bindings/py_module.cpp)
+install(TARGETS rlchess_engine
+        LIBRARY DESTINATION "${SKBUILD_PLATLIB_DIR}"
+        RUNTIME DESTINATION "${SKBUILD_PLATLIB_DIR}"
+        ARCHIVE DESTINATION "${SKBUILD_PLATLIB_DIR}"
+)
 
 target_link_libraries(rlchess_engine PRIVATE rlchess)
 
