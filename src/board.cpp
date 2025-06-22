@@ -1,4 +1,4 @@
-#include "rlchess/board.h"
+#include "rlchess/board.hpp"
 
 #include <sstream>
 #include <stdexcept>
@@ -8,11 +8,11 @@
 namespace rlchess {
 
 namespace {
-constexpr const char *STARTPOS_FEN =
+constexpr const std::string_view STARTPOS_FEN =
     "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
 // Helper to convert algebraic square (e.g. "e4") to 0-63 index (a1=0).
-inline int square_index(const std::string &alg) {
+inline int square_index(const std::string_view alg) {
     if (alg.size() != 2) return -1;
     char file = alg[0];
     char rank = alg[1];
@@ -25,13 +25,14 @@ inline int square_index(const std::string &alg) {
 
 Board::Board() { from_fen(STARTPOS_FEN); }
 
-Board::Board(const std::string &fen) { from_fen(fen); }
+Board::Board(std::string_view fen) { from_fen(fen); }
 
-const std::string &Board::fen() const { return fen_string_; }
+std::string_view Board::fen() const noexcept { return fen_string_; }
 
 std::string Board::to_string() const { return fen_string_; }
 
-void Board::from_fen(const std::string &fen) {
+void Board::from_fen(std::string_view fen_sv) {
+    const std::string fen(fen_sv);
     // Reset state
     squares_.fill('\0');
     castling_rights_ = 0;

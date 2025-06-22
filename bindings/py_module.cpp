@@ -1,5 +1,5 @@
 #include <pybind11/pybind11.h>
-#include "rlchess/board.h"
+#include "rlchess/board.hpp"
 
 namespace py = pybind11;
 using rlchess::Board;

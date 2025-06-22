@@ -1,7 +1,7 @@
-#ifndef RLCHESS_BOARD_H
-#define RLCHESS_BOARD_H
+#pragma once
 
 #include <string>
+#include <string_view>
 #include <array>
 #include <cstdint>
 
@@ -12,10 +12,10 @@ namespace rlchess {
 class Board {
 public:
     Board();                                     // "startpos"
-    explicit Board(const std::string &fen);      // parse custom FEN
+    explicit Board(std::string_view fen);        // parse custom FEN
 
     // Return the original (normalised) FEN string
-    const std::string &fen() const;
+    [[nodiscard]] std::string_view fen() const noexcept;
 
     // ASCII representation for easy debugging / __str__ in Python
     std::string to_string() const;
@@ -24,7 +24,7 @@ public:
     bool operator==(const Board &) const = default;
 
 private:
-    void from_fen(const std::string &fen);
+    void from_fen(std::string_view fen);
 
     // Cached FEN (normalised). Keeps things simple for now.
     std::string fen_string_{};
@@ -40,5 +40,3 @@ private:
 };
 
 } // namespace rlchess
-
-#endif // RLCHESS_BOARD_H
