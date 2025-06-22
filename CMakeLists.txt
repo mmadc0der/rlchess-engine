@@ -53,5 +53,7 @@ set_target_properties(rlchess_engine PROPERTIES
 include(CTest)
 if(BUILD_TESTING)
   enable_testing()
-  add_subdirectory(tests)
+  if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests")
+    add_subdirectory(tests)
+  endif()
 endif()
