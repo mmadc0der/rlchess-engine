@@ -1,0 +1,16 @@
+[build-system]
+requires = ["scikit-build-core>=0.8", "pybind11~=2.12"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "rlchess-engine"
+version = "0.0.1"
+description = "C++ chess engine with pybind11 bindings for RL research"
+readme = "README.md"
+authors = [ { name = "RLChess Dev" } ]
+license = { text = "MIT" }
+requires-python = ">=3.9"
+
+[tool.scikit-build]
+# Forward CMake args
+cmake.verbose = true

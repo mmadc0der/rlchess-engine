@@ -1,0 +1,36 @@
+# CMake build artifacts
+build/
+CMakeCache.txt
+CMakeFiles/
+cmake-build-*/
+Makefile
+*.cmake
+
+# Compilers
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.exe
+*.pdb
+*.ilk
+
+# Ninja
+*.ninja
+.ninja_log
+.ninja_deps
+
+# Python build artifacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+
+# Virtual environments
+.venv/
+.env/
+
+# Misc
+*.log
